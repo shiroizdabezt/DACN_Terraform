@@ -18,7 +18,6 @@ resource "tls_private_key" "mykey1" {
 
 // Create Key Pair for Connecting EC2 via SSH
 resource "aws_key_pair" "key_pair" {
-  key_name   = "mykey2"
   public_key = tls_private_key.mykey1.public_key_openssh
   depends_on = [
     tls_private_key.mykey1
@@ -27,7 +26,6 @@ resource "aws_key_pair" "key_pair" {
 
 # Create a security group
 resource "aws_security_group" "sg_ec2" {
-  name        = "sg_ec3"
   description = "Security group for EC2"
 
   ingress {
@@ -74,11 +72,6 @@ resource "aws_instance" "public_instance" {
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.key_pair.key_name
   vpc_security_group_ids = [aws_security_group.sg_ec2.id]
-
-
-  tags = {
-    Name = "AINUizdabezt"
-  }
 
   root_block_device {
     volume_size = 30
