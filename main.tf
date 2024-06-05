@@ -77,7 +77,7 @@ resource "aws_instance" "public_instance" {
 
 
   tags = {
-    Name = "Strong Can Go"
+    Name = "AINUizdabezt"
   }
 
   root_block_device {
