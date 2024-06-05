@@ -1,0 +1,35 @@
+name: "Terraform"
+on:
+  push:
+    branches: ["main"]
+permissions: read-all
+jobs:
+  terraform:
+    name: "Terraform"
+    env:
+      # AWS secrets
+      AWS_ACCESS_KEY_ID: ${{ secrets.SC_AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{secrets.SC_AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.SC_AWS_REGION }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: "checkout"
+        uses: "actions/checkout@v3"
+
+      - name: Setup Terraform with specified version on the runner
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.3.0
+
+      - name: Terraform init
+        run: terraform init
+
+      - name: Terraform validate
+        run: terraform validate
+
+      - name: Terraform plan
+        run: terraform plan
+
+      - name: Terraform apply
+        run: terraform apply -auto-approve
