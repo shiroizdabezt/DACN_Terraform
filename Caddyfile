@@ -1,0 +1,3 @@
+tuilalinh.id.vn:80
+
+reverse_proxy :3000
