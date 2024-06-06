@@ -7,13 +7,20 @@ resource "null_resource" "provisioner" {
     host        = aws_instance.public_instance.public_ip
   }
 
-  provisioner "file" {    
+  provisioner "Install_Package" {    
     source      = "Install.sh"   
     destination = "/tmp/Install.sh"
     }  
+  
+  provisioner "Caddyfile" {    
+    source      = "Caddyfile"   
+    destination = "/etc/caddy/Caddyfile"
+    }  
+
   provisioner "remote-exec" {    
     inline = [
         "chmod +x /tmp/Install.sh", 
-         "/tmp/Install.sh args",] 
-    }
+         "/tmp/Install.sh args",
+         "sudo systemctl start caddy",] 
+  } 
 }
