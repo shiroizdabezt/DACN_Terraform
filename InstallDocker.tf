@@ -6,15 +6,15 @@ resource "null_resource" "provisioner" {
     private_key = tls_private_key.mykey1.private_key_pem
     host        = aws_instance.public_instance.public_ip
   }
-  
-  provisioner "Caddyfile" {    
-    source      = "Caddyfile"   
-    destination = "/etc/caddy/Caddyfile"
-    }  
 
-  provisioner "Install_Package" {    
+  provisioner "file" {    
     source      = "Install.sh"   
     destination = "/tmp/Install.sh"
+    }  
+  
+  provisioner "file" {    
+    source      = "Caddyfile"   
+    destination = "/etc/caddy/Caddyfile"
     }  
 
   provisioner "remote-exec" {    
