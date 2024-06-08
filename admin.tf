@@ -1,5 +1,5 @@
 # Create a security group
-resource "aws_security_group" "sg_frontend" {
+resource "aws_security_group" "sg_admin" {
   description = "Security group for EC2"
 
   ingress {
@@ -41,11 +41,11 @@ resource "aws_security_group" "sg_frontend" {
   }
 }
 
-resource "aws_instance" "frontend" {
+resource "aws_instance" "admin" {
   ami                    = "ami-0e001c9271cf7f3b9"
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.key_pair.key_name
-  vpc_security_group_ids = [aws_security_group.sg_frontend.id]
+  vpc_security_group_ids = [aws_security_group.sg_admin.id]
 
   tags = {
     Name =""
@@ -61,42 +61,42 @@ resource "aws_instance" "frontend" {
     type        = "ssh"
     user        = "ubuntu"
     private_key = tls_private_key.mykey1.private_key_pem
-    host        = aws_instance.frontend.public_ip
+    host        = aws_instance.admin.public_ip
   }
 
   provisioner "file" {    
-    source      = "frontend.sh"   
-    destination = "/tmp/frontend.sh"
+    source      = "backend.sh"   
+    destination = "/tmp/backend.sh"
     }  
 
   provisioner "remote-exec" {    
     inline = [
-        "chmod +x /tmp/frontend.sh", 
-         "/tmp/frontend.sh args",
+        "chmod +x /tmp/backend.sh", 
+         "/tmp/backend.sh args",
          ] 
   } 
   
   provisioner "file" {    
-    source      = "InstallCaddy.sh"   
-    destination = "/tmp/InstallCaddy.sh"
+    source      = "admincaddy.sh"   
+    destination = "/tmp/admincaddy.sh"
     } 
 
   provisioner "remote-exec" {    
     inline = [
-         "chmod +x /tmp/InstallCaddy.sh", 
-         "/tmp/InstallCaddy.sh args",] 
+         "chmod +x /tmp/admincaddy.sh", 
+         "/tmp/admincaddy.sh args",] 
   } 
 
 }
 
-resource "aws_eip" "public_ip_frontend" {
+resource "aws_eip" "public_ip_admin" {
   vpc = true
-  instance = aws_instance.frontend.id
+  instance = aws_instance.admin.id
   depends_on = [
-    aws_instance.frontend
+    aws_instance.admin
   ]
 }
 
-output "elastic_ip_public_frontend" {
-  value = aws_eip.public_ip_frontend.public_ip
+output "elastic_ip_public_admin" {
+  value = aws_eip.public_ip_admin.public_ip
 }
