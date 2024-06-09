@@ -66,7 +66,7 @@ resource "aws_instance" "frontend" {
     agent       = "false"
     type        = "ssh"
     user        = "ubuntu"
-    private_key = ${{ secrets.PRIVATE_KEY }}
+    private_key = PRIVATE_KEY
     host        = aws_instance.frontend.public_ip
   }
 
