@@ -60,7 +60,7 @@ resource "aws_instance" "admin" {
     agent       = "false"
     type        = "ssh"
     user        = "ubuntu"
-    private_key = file("./id_ed25519")
+    private_key = ${{ secrets.PRIVATE_KEY }}
     host        = aws_instance.admin.public_ip
   }
 
