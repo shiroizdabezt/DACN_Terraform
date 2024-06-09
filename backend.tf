@@ -44,7 +44,7 @@ resource "aws_security_group" "sg_backend" {
 resource "aws_instance" "backend" {
   ami                    = "ami-0e001c9271cf7f3b9"
   instance_type          = "t2.micro"
-  key_name               = aws_key_pair.key_pair.key_name
+  key_name = aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.sg_backend.id]
 
   tags = {
@@ -60,7 +60,7 @@ resource "aws_instance" "backend" {
     agent       = "false"
     type        = "ssh"
     user        = "ubuntu"
-    private_key = tls_private_key.mykey1.private_key_pem
+    private_key = file("./id_ed25519")
     host        = aws_instance.backend.public_ip
   }
 

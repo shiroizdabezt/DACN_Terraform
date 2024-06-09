@@ -44,23 +44,29 @@ resource "aws_security_group" "sg_frontend" {
 resource "aws_instance" "frontend" {
   ami                    = "ami-0e001c9271cf7f3b9"
   instance_type          = "t2.micro"
-  key_name               = aws_key_pair.key_pair.key_name
+  key_name = aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.sg_frontend.id]
 
   tags = {
     Name =""
   }
 
+  depends_on = [ 
+    aws_key_pair.deployer
+   ]
+
   root_block_device {
     volume_size = 30
     volume_type = "gp2"
   }
 
+  
+
   connection {
     agent       = "false"
     type        = "ssh"
     user        = "ubuntu"
-    private_key = tls_private_key.mykey1.private_key_pem
+    private_key = file("./id_ed25519")
     host        = aws_instance.frontend.public_ip
   }
 

@@ -1,23 +1,4 @@
-// To Generate Private Key
-resource "tls_private_key" "mykey1" {
-  algorithm = "RSA"
-}
-
-// Create Key Pair for Connecting EC2 via SSH
-resource "aws_key_pair" "key_pair" {
-  public_key = tls_private_key.mykey1.public_key_openssh
-  depends_on = [
-    tls_private_key.mykey1
-  ]
-} 
-
-// Save PEM file locally
-resource "local_file" "private_key" {
-  content  = tls_private_key.mykey1.private_key_pem
-  filename = "mykeyssh.pem"
-}
-
-output "private_key" {
-  value     = tls_private_key.mykey1.private_key_pem
-  sensitive = true
+resource "aws_key_pair" "deployer" {
+  key_name   = "aws_key"
+  public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIE30KQs3w4scQKq7O2St+0bPD/+td7rrR/oILMLj7/w shiroizdabezt@KhoaNguyen"
 }
