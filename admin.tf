@@ -65,14 +65,14 @@ resource "aws_instance" "admin" {
   }
 
   provisioner "file" {    
-    source      = "backend.sh"   
-    destination = "/tmp/backend.sh"
+    source      = "admin.sh"   
+    destination = "/tmp/admin.sh"
     }  
 
   provisioner "remote-exec" {    
     inline = [
-        "chmod +x /tmp/backend.sh", 
-         "/tmp/backend.sh args",
+        "chmod +x /tmp/admin.sh", 
+         "/tmp/admin.sh args",
          ] 
   } 
   
