@@ -60,7 +60,7 @@ resource "aws_instance" "backend" {
     agent       = "false"
     type        = "ssh"
     user        = "ubuntu"
-    private_key = PRIVATE_KEY
+    private_key = file("./id_ed25519")
     host        = aws_instance.backend.public_ip
   }
 
