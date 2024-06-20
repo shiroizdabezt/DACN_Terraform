@@ -42,7 +42,7 @@ resource "aws_security_group" "sg_backend" {
 }
 
 resource "aws_instance" "backend" {
-  ami                    = "ami-0e001c9271cf7f3b9"
+  ami                    = "ami-0f30a9c3a48f3fa79"
   instance_type          = "t2.micro"
   key_name = aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.sg_backend.id]
