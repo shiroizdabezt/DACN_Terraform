@@ -8,21 +8,21 @@ terraform {
 }
 
 provider "aws" {
-  region     = "us-west-2"
+  region     = "us-east-1"
 }
 
-resource "aws_s3_bucket" "bucket" {
-  bucket = "mybucket"
-
+resource "aws_s3_bucket" "mybucket" {
+  bucket = "ec2mytfstate"
+  
   tags = {
     Name = "My bucket"
   }
 }
 
-resource "aws_s3_bucket_object" "file" {
-  bucket = aws_s3_bucket.bucket.id
-  key    = "state/terraform.tfstate"
-}
+# resource "aws_s3_bucket_object" "file" {
+#   bucket = aws_s3_bucket.bucket.id
+#   key    = "state/terraform.tfstate"
+# }
 
 
 # terraform {
