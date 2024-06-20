@@ -87,6 +87,16 @@ resource "aws_instance" "admin" {
          "/tmp/admincaddy.sh args",] 
   } 
 
+  provisioner "remote-exec" {    
+    inline = [
+         "sudo systemctl restart caddy",] 
+  } 
+
+  provisioner "remote-exec" {    
+    inline = [
+         "sudo systemctl restart caddy",] 
+  } 
+
 }
 
 resource "aws_eip" "public_ip_admin" {
