@@ -25,19 +25,19 @@ resource "aws_s3_bucket" "mybucket" {
   }
 }
 
-# resource "aws_s3_bucket_object" "file" {
-#   bucket = aws_s3_bucket.mybucket.id
-#   key    = "state/terraform.tfstate"
-# }
-
-
-terraform {
-  backend "s3" {
-    bucket = "ec2mytfstate"
-    key    = "state/terraform.tfstate"
-    region = "us-east-2"  # Đảm bảo vùng khớp với bucket
-  }
+resource "aws_s3_bucket_object" "file" {
+  bucket = "ec2mytfstate"
+  key    = "state/terraform.tfstate"
 }
+
+
+# terraform {
+#   backend "s3" {
+#     bucket = "ec2mytfstate"
+#     key    = "state/terraform.tfstate"
+#     region = "us-east-2"  # Đảm bảo vùng khớp với bucket
+#   }
+# }
 
 # # Tạo S3 bucket ở vùng chính xác
 # resource "aws_s3_bucket" "tf_state_bucket" {
