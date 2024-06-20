@@ -18,7 +18,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "mybucket" {
-  bucket = "ec2mytfstate4"
+  bucket = "ec2mytfstate5"
   acl = "private"
 
   versioning {
