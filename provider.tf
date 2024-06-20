@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "aws" {
-  region     = "us-east-1"
+  region     = "us-west-2"
 }
 
 # resource "aws_s3_bucket" "bucket" {
@@ -31,7 +31,7 @@ terraform {
   backend "s3" {
     bucket = "your-unique-bucket-name"
     key    = "path/to/terraform.tfstate"
-    region = "us-east-1"  # Đảm bảo vùng khớp với bucket
+    region = "us-west-2"  # Đảm bảo vùng khớp với bucket
   }
 }
 
