@@ -18,7 +18,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "mybucket" {
-  bucket = "ec2mytfstate3"
+  bucket = "ec2mytfstate4"
   acl = "private"
 
   versioning {
@@ -30,7 +30,7 @@ resource "aws_s3_bucket" "mybucket" {
 }
 
 resource "aws_s3_bucket_object" "file" {
-  bucket = "ec2mytfstate3"
+  bucket = aws_s3_bucket.mybucket.id
   key    = "state/terraform.tfstate"
 }
 
