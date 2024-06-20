@@ -14,6 +14,8 @@ provider "aws" {
 resource "aws_s3_bucket" "bucket" {
   bucket = "mybucket"
 
+  region = "us-east-1"
+
   tags = {
     Name = "My bucket"
   }
