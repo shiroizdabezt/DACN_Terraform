@@ -11,25 +11,19 @@ resource "aws_route53_zone" "tuilalinh_zone" {
 }
 
 resource "aws_route53_record" "backend" {
-  zone_id = aws_route53_zone.apituilalinh_zone.id
+  zone_id = aws_route53_zone.tuilalinh_zone.id
   name    = "api.tuilalinh.id.vn"
   type    = "A"
   ttl     = 300
   records = [aws_eip.public_ip_backend.public_ip]
 }
 
-resource "aws_route53_zone" "apituilalinh_zone" {
-  name = "api.tuilalinh.id.vn"
-}
 
 resource "aws_route53_record" "admin" {
-  zone_id = aws_route53_zone.admintuilalinh_zone.id
+  zone_id = aws_route53_zone.tuilalinh_zone.id
   name    = "admin.tuilalinh.id.vn"
   type    = "A"
   ttl     = 300
   records = [aws_eip.public_ip_admin.public_ip]
 }
 
-resource "aws_route53_zone" "admintuilalinh_zone" {
-  name = "admin.tuilalinh.id.vn"
-}
