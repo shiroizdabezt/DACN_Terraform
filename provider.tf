@@ -5,12 +5,6 @@ terraform {
       version = "~> 4.0"
     }
   }
-
-  backend "s3" {
-    bucket = "my_bucket_tfstate"
-    key    = "state/terraform.tfstate"
-    region = "us-east-1"
-  }
 }
 
 resource "aws_s3_bucket" "bucket" {
