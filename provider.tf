@@ -17,22 +17,22 @@ provider "aws" {
   region     = "us-east-2"
 }
 
-resource "aws_s3_bucket" "mybucket" {
-  bucket = "ec2mytfstate5"
-  acl = "private"
+# resource "aws_s3_bucket" "mybucket" {
+#   bucket = "ec2mytfstate5"
+#   acl = "private"
 
-  versioning {
-    enabled = true
-  }
-  tags = {
-    Name = "My bucket"
-  }
-}
+#   versioning {
+#     enabled = true
+#   }
+#   tags = {
+#     Name = "My bucket"
+#   }
+# }
 
-resource "aws_s3_bucket_object" "file" {
-  bucket = aws_s3_bucket.mybucket.id
-  key    = "state/terraform.tfstate"
-}
+# resource "aws_s3_bucket_object" "file" {
+#   bucket = aws_s3_bucket.mybucket.id
+#   key    = "state/terraform.tfstate"
+# }
 
 
 # terraform {
