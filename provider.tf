@@ -8,7 +8,7 @@ terraform {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "my_bucket_tfstate"
+  bucket = "mybucket"
 
   tags = {
     Name = "My bucket"
