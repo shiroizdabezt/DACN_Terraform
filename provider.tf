@@ -19,7 +19,11 @@ provider "aws" {
 
 resource "aws_s3_bucket" "mybucket" {
   bucket = "ec2mytfstate"
-  
+  acl = "private"
+
+  versioning {
+    enabled = true
+  }
   tags = {
     Name = "My bucket"
   }
