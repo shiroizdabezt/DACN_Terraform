@@ -17,23 +17,24 @@ provider "aws" {
   region     = "us-east-2"
 }
 
+# Tạo S3 bucket
 resource "aws_s3_bucket" "mybucket" {
   bucket = "ec2mytfstate"
-  acl = "private"
+  acl    = "private"
 
-  versioning {
-    enabled = true
-  }
   tags = {
     Name = "My bucket"
   }
 }
 
-resource "aws_s3_bucket_object" "file" {
-  bucket = "ec2mytfstate"
-  key    = "state/terraform.tfstate"
-}
+# Kích hoạt versioning cho S3 bucket
+resource "aws_s3_bucket_versioning" "mybucket_versioning" {
+  bucket = aws_s3_bucket.mybucket.id
 
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
 
 # terraform {
 #   backend "s3" {
