@@ -19,10 +19,10 @@ resource "aws_s3_bucket" "mybucket" {
   }
 }
 
-# resource "aws_s3_bucket_object" "file" {
-#   bucket = aws_s3_bucket.bucket.id
-#   key    = "state/terraform.tfstate"
-# }
+resource "aws_s3_bucket_object" "file" {
+  bucket = aws_s3_bucket.bucket.id
+  key    = "state/terraform.tfstate"
+}
 
 
 # terraform {
