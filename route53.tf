@@ -27,3 +27,6 @@ resource "aws_route53_record" "admin" {
   records = [aws_eip.public_ip_admin.public_ip]
 }
 
+output "name_server"{
+  value= aws_route53_zone.tuilalinh_zone.name_servers
+}
