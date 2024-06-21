@@ -31,6 +31,13 @@ jobs:
       - name: Terraform init
         run: terraform init
 
+      - name: Download terraform.tfstate from S3
+        run: |
+          aws s3 cp s3://ec2mytfstate5/state/terraform.tfstate .
+          
+      - name: Terraform destroy
+        run: terraform destroy -auto-approve
+
       - name: Terraform validate
         run: terraform validate
 
